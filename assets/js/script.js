@@ -16,7 +16,6 @@ var choicesEl = document.getElementById("choices");
 
 var endEl = document.getElementById("end");
 
-// var finalScoreEl = document.getElementById("final-score");
 
 var submitbtn = document.getElementById("submit");
 
@@ -25,21 +24,17 @@ var checkAnswerEl = document.getElementById("check");
 
 
 var questions = [
-  {
-    title: "Commonly used data types DO NOT include:",
+  {    title: "Commonly used data types DO NOT include:",
 
     choices: ["strings", "booleans", "alerts", "numbers"],
 
-    answer: "alerts",
-  },
+    answer: "alerts",  },
 
-  {
-    title: "The condition in an if / else statement is enclosed within ____.",
+  {    title: "The condition in an if / else statement is enclosed within ____.",
 
     choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
 
-    answer: "parentheses",
-  },
+    answer: "parentheses",  },
 
   {
     title: "Which of the following is a type of scope? ",
