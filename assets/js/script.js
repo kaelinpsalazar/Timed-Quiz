@@ -42,15 +42,15 @@ var questions = [
   },
 
   {
-    title: "How do you begin a for loop?",
-    choices: ["i=5-7", "(0<0<9)", "(i=0;i<9;i++)", "z++=i<9"],
-    answer: "(i=0;i<9;i++)",
+    title: "Which of the following is a type of scope? ",
+    choices: ["pari", "local", "mega)", "micro"],
+    answer: "local",
   },
 
   {
-    title: "Which HTML element is used to insert JavaScript?",
-    choices: ["<style>", "<main>", "<header>", "<script>"],
-    answer: "<script>",
+    title: "What do I use when I want to stop a button from refreshing the page?",
+    choices: ["event.stopPropagation()", "addEventListener", "window.location.href", "<script>"],
+    answer: "event.stopPropagation()",
   },
 ];
 
@@ -85,10 +85,10 @@ function getQuestion() {
   var currentQuestion = questions[currentIndex];
   var titleEl = document.getElementById("questiontitle");
   titleEl.textContent = currentQuestion.title;
-  choicesEl.innerHTML = "";
+  choicesEl.textContent = "";
 
   currentQuestion.choices.forEach((option, i) => {
-    var createButton = document.createElement("BUTTON");
+    var createButton = document.createElement("button");
     createButton.setAttribute("class", "option");
     createButton.setAttribute("value", option);
     createButton.textContent = i + 1 + ". " + option;
