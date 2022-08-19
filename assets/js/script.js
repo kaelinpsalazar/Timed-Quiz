@@ -22,7 +22,7 @@ var submitbtn = document.getElementById("submit");
 var checkAnswerEl = document.getElementById("check");
 
 
-
+// List all questions and answers in an array
 var questions = [
   {    title: "Commonly used data types DO NOT include:",
 
@@ -49,21 +49,22 @@ var questions = [
   },
 ];
 
-// start function that start timer, hides start screen with a set attribute,then unhides the questions div, call show questions function
+
 
 var time = questions.length * 15;
-// setting timer length at 60
+// setting timer length at 60 based on how many questions you have
 
 function timeInterval() {
   time--;
+  // time is subtracted by one
   timerEl.textContent = time;
-  // refreshes time
+  // if time =0, the quiz is over
   if (time <= 0) {
     quizEnd();
   }
 }
-// determines if time has run out
 
+// function to start the quiz, hide the start screen when quiz starts, make your questions appear, and begin the countdown clock.
 function startQuiz() {
   startScreenEl.setAttribute("class", "hide");
 
@@ -76,6 +77,7 @@ function startQuiz() {
   getQuestion();
 }
 
+// then make a fuction that begins cycling through the array of questions. 
 function getQuestion() {
   var currentQuestion = questions[currentIndex];
   var titleEl = document.getElementById("questiontitle");
@@ -124,6 +126,7 @@ function questionClick() {
   }
 }
 
+// this function ends the quiz, stops the timer, presents your score, and hides the sections that are no longer needed.
 function quizEnd() {
   clearInterval(timerID);
 
