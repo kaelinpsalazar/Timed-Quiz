@@ -150,21 +150,22 @@ function quizEnd() {
   var finalScoreEl = document.getElementById("final-score");
   finalScoreEl.textContent = time;
 
+  saveScore();
+
   }
+
+  var LOCAL_STORAGE_KEY = "scores"
+  var submitbtn = document.getElementById("submit");
+  var listEl = document.querySelector("ol");  
+  var scores = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+
 
   function saveScore(){
 
-  // saving my score array
-  var LOCAL_STORAGE_KEY = "scores"
-  // var submitbtn = document.getElementById("submit");
-  var listEl = document.querySelector("ol");  
-  var scores = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
- 
-  
   
   var createListItem = function (score) {
     var liEl = document.createElement("li");
-    liEl.textContent = score.initialsEl + " - " + score.finalScoreEl;
+    liEl.textContent = initialsEl.innerHTML + " - " + finalScoreEl.innerHTML;
     return liEl;
   };
   
@@ -173,19 +174,17 @@ function quizEnd() {
       return;
     }
     listEl.innerHTML = "";
+    console.log("scores",scores)
     for (let i = 0; i < scores.length; i += 1) {
       let score = scores [i];
+      console.log(score);
       let liEl = createListItem(score);
       listEl.append(liEl); 
     }
   };
   
   submitbtn.addEventListener("click", function() { 
-    var score = {
-      initialsEl,
-      finalScoreEl,
-    }
-    
+      var score = initialsEl.innerHTML + "--" + finalScoreEl.innerHTML;
     scores.push(score);
     scores.sort(function (a, b) {
       return b.value - a.value;
@@ -202,6 +201,5 @@ function quizEnd() {
 
 
 
-submitbtn.onclick = saveScore;
 startbtn.onclick = startQuiz;
 
