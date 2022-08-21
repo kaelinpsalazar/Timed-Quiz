@@ -8,6 +8,8 @@ var startScreenEl = document.getElementById("startscreen");
 
 var startbtn = document.getElementById("start");
 
+// var submitbtn = getElementById("submit");
+
 var questionsEl = document.getElementById("questions");
 
 var titleEl = document.getElementById("questiontitle");
@@ -16,10 +18,19 @@ var choicesEl = document.getElementById("choices");
 
 var endEl = document.getElementById("end");
 
+var initialsEl = document.getElementById("initials");
+
+var finalScoreEl = document.getElementById("final-score");
 
 var submitbtn = document.getElementById("submit");
 
+
+
+// var finalScoreEl = getElementById("final-score");
+
+
 var checkAnswerEl = document.getElementById("check");
+
 
 
 // List all questions and answers in an array
@@ -37,11 +48,11 @@ var questions = [
     answer: "parentheses",  },
 
   {
-    title: "Which of the following is a type of scope? ",
-    choices: ["pari", "local", "mega)", "micro"],
-    answer: "local",
+    title: "What is the meaning of life? ",
+    choices: ["To have a family.", "To get a good education and be happy.", "To travel and love your life", "42"],
+    answer: "42",
   },
-
+  
   {
     title: "What do I use when I want to stop a button from refreshing the page?",
     choices: ["event.stopPropagation()", "addEventListener", "window.location.href", "<script>"],
@@ -73,7 +84,7 @@ function startQuiz() {
   timerID = setInterval(timeInterval, 1000);
 
   timerEl.textContent = time;
-
+  
   getQuestion();
 }
 
@@ -83,7 +94,7 @@ function getQuestion() {
   var titleEl = document.getElementById("questiontitle");
   titleEl.textContent = currentQuestion.title;
   choicesEl.textContent = "";
-
+  
   currentQuestion.choices.forEach((option, i) => {
     var createButton = document.createElement("button");
     createButton.setAttribute("class", "option");
@@ -104,7 +115,7 @@ function questionClick() {
       time = 0;
     }
     timerEl.textContent = time;
-
+    
     checkAnswerEl.textContent = "Wrong!";
   } else {
     // if right answer is chosen
@@ -133,14 +144,64 @@ function quizEnd() {
   choicesEl.setAttribute("class", "hide");
   
   questionsEl.setAttribute("class", "hide");
-
+  
   endEl.removeAttribute("class", "hide");
   
   var finalScoreEl = document.getElementById("final-score");
   finalScoreEl.textContent = time;
 
+  }
+
+  function saveScore(){
+
+  // saving my score array
+  var LOCAL_STORAGE_KEY = "scores"
+  // var submitbtn = document.getElementById("submit");
+  var listEl = document.querySelector("ol");  
+  var scores = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+ 
   
+  
+  var createListItem = function (score) {
+    var liEl = document.createElement("li");
+    liEl.textContent = score.initialsEl + " - " + score.finalScoreEl;
+    return liEl;
+  };
+  
+  var renderScores = function() {
+    if (!listEl){
+      return;
+    }
+    listEl.innerHTML = "";
+    for (let i = 0; i < scores.length; i += 1) {
+      let score = scores [i];
+      let liEl = createListItem(score);
+      listEl.append(liEl); 
+    }
+  };
+  
+  submitbtn.addEventListener("click", function() { 
+    var score = {
+      initialsEl,
+      finalScoreEl,
+    }
+    
+    scores.push(score);
+    scores.sort(function (a, b) {
+      return b.value - a.value;
+    });
+    while (scores.length > 10) {
+      scores.pop();
+    }
+    renderScores();
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(scores));
+  });
+  
+  renderScores();
 }
 
+
+
+submitbtn.onclick = saveScore;
 startbtn.onclick = startQuiz;
 
