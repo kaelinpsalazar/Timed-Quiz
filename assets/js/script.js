@@ -165,7 +165,7 @@ function quizEnd() {
   
   var createListItem = function (score) {
     var liEl = document.createElement("li");
-    liEl.textContent = initialsEl.innerHTML + " - " + finalScoreEl.innerHTML;
+    liEl.textContent = score;
     return liEl;
   };
   
@@ -183,8 +183,13 @@ function quizEnd() {
     }
   };
   
-  submitbtn.addEventListener("click", function() { 
-      var score = initialsEl.innerHTML + "--" + finalScoreEl.innerHTML;
+
+
+
+  submitbtn.addEventListener("click", function() 
+  
+  { console.log(initialsEl.value)
+      var score = initialsEl.value + "--" + finalScoreEl.innerHTML;
     scores.push(score);
     scores.sort(function (a, b) {
       return b.value - a.value;
