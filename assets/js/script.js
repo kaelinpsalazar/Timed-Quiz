@@ -65,8 +65,7 @@ var questions = [
 var time = questions.length * 15;
 // setting timer length at 60 based on how many questions you have
 
-function timeInterval() {
-  time--;
+function timeInterval() {  time--;
   // time is subtracted by one
   timerEl.textContent = time;
   // if time =0, the quiz is over
@@ -102,7 +101,6 @@ function getQuestion() {
     createButton.textContent = i + 1 + ". " + option;
     // create an event listener for each option
     createButton.onclick = questionClick;
-    // show on page
     choicesEl.appendChild(createButton);
   });
 }
@@ -111,8 +109,7 @@ function questionClick() {
   if (this.value !== questions[currentIndex].answer) {
     // time penalty
     time -= 5;
-    if (time < 0) {
-      time = 0;
+    if (time < 0) { time = 0;
     }
     timerEl.textContent = time;
     
@@ -124,8 +121,7 @@ function questionClick() {
   // show whether or not answer is right or wrong
   checkAnswerEl.setAttribute("class", "check");
   setTimeout(function () {
-    checkAnswerEl.setAttribute("class", "check hide");
-  }, 2500);
+    checkAnswerEl.setAttribute("class", "check hide");  }, 2500);
   // cycle to next question
   currentIndex++;
   // determine if questions have run out
@@ -141,18 +137,13 @@ function questionClick() {
 function quizEnd() {
   clearInterval(timerID);
 
-  choicesEl.setAttribute("class", "hide");
-  
-  questionsEl.setAttribute("class", "hide");
-  
-  endEl.removeAttribute("class", "hide");
-  
+  choicesEl.setAttribute("class", "hide");  
+  questionsEl.setAttribute("class", "hide");  
+  endEl.removeAttribute("class", "hide");  
   var finalScoreEl = document.getElementById("final-score");
   finalScoreEl.textContent = time;
 
-  saveScore();
-
-  }
+  saveScore(); }
 
   var LOCAL_STORAGE_KEY = "scores"
   var submitbtn = document.getElementById("submit");
